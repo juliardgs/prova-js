@@ -30,3 +30,38 @@ export const SubmitButton = styled(RectButton)`
     margin-left: 10px;
     padding: 0 12px;
 `
+
+export const List = styled.FlatList.attrs({
+    showVerticalScrollIndicator: false,
+})`
+    margin-top: 20px;
+`
+export const User = styled.View`
+    align-items: center;
+    margin: 0 20px 30px;
+`
+
+export const Avatar = styled.Image`
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    background: #eee;
+`
+
+export const Name = styled.Text`
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 4px;
+    text-align: center;
+`
+
+export const Bio = styled.Text.attrs({
+    numberofLines: 2
+})`
+    font-size: 13px;
+    line-height: 18px;
+    color: #999;
+    margin-top: 5px;
+    text-align: center;
+`

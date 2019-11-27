@@ -1,14 +1,31 @@
 import React, { Component } from 'react'
-import { Container, Form, Input, SubmitButton } from './styles'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import { Button } from 'react-native'
+import { Container, Form, Input, SubmitButton, List, User, Avatar, Name, Bio } from './styles'
+//import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Keyboard } from 'react-native'
 import api from '../../services/api'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export default class Main extends Component{
 
     state = {
         newUser: '',
         users: [],
+    }
+
+    async componentDidMount() {
+        const users = await AsyncStorage.getItem('users')
+        if(users){
+            this.setState({users: JSON.parse(users)})
+        }
+    }
+
+    componentDidUpdate(_, prevState){
+        const { users } = this.state
+
+        if(prevState.users != users){
+            AsyncStorage.setItem('users', JSON.stringify(users))
+        }
     }
 
     handleAddUser = async () => {
@@ -51,10 +68,23 @@ export default class Main extends Component{
                        returnKeyType='send'
                        onSubmitEditing={this.handleAddUser}
                     />
-                    <SubmitButton onPress={this.handleAddUser}>
-                       <Icon name='add' size={20} color="#fff" />
-                    </SubmitButton>
+                    <Button title="+" onPress={this.handleAddUser}>
+                       {/* <Icon name='add' size={20} color="#fff" /> */}
+                    </Button>
                 </Form>
+                <List 
+                    data={users}
+                    keyExtractor={user => user.login}
+                    renderItem={({ item }) => (
+                        <User>
+                            <Avatar source={{ uri: item.avatar }}/>
+                            <Name>{item.name}</Name>
+                            <Bio>{item.bio}</Bio>
+
+                            <Button title='Ver Perfil' onPress={() => {}} />
+                        </User>
+                    )}
+                />
             </Container>
          )
     }
