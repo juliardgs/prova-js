@@ -1,6 +1,13 @@
 import React from 'react'
-import { View } from 'react-native'
+import { WebView } from 'react-native-webview'
 
-export default function User(){
-  return <View />
-}
+const User = ({ navigation }) => (
+   <WebView source={{ uri: `https://github.com/${navigation.state.params.user.login}` }} />
+)
+
+
+User.navigationOptions = ({ navigation }) => ({
+  title: navigation.state.params.user.name
+})
+
+export default User
