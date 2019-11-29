@@ -22,7 +22,7 @@ export const Input = styled.TextInput`
     border: 1px solid #eee;
 `
 
-export const SubmitButton = styled(RectButton)`
+export const Button = styled(RectButton)`
     justify-content: center;
     align-items: center;
     background: #7159c1;
@@ -65,3 +65,13 @@ export const Bio = styled.Text.attrs({
     margin-top: 5px;
     text-align: center;
 `
+
+export const DeleteButton = styled(RectButton)`
+    margin-top: 10px;
+    align-self: stretch; /* Força o botão a esticar e ocupar todo o espaço */
+    border-radius: 4px;
+    background-color: #cc3102;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+`;

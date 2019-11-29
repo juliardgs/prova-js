@@ -28,6 +28,7 @@ export default class Main extends Component{
         }
     }
 
+
     handleAddUser = async () => {
         const { users, newUser } = this.state
 
@@ -51,6 +52,14 @@ export default class Main extends Component{
         })
 
         Keyboard.dismiss()
+    }
+
+    handleDelete = user =>{
+        const { users } = this.state;
+        users.splice(users.indexOf(user),1) //retira o user do array
+        this.setState({ users: users })
+        this.componentDidUpdate('', users) //n sei se é o correto a se fazer, porém deu certo hahaha, aqui tá atualizando o storage pra refletir as exclusões quando o app for aberto novamente
+        //console.log(users)
     }
 
     render(){
@@ -80,7 +89,7 @@ export default class Main extends Component{
                             <Avatar source={{ uri: item.avatar }}/>
                             <Name>{item.name}</Name>
                             <Bio>{item.bio}</Bio>
-
+                            <Button title="Excluir" onPress={() => this.handleDelete(item)}></Button>
                             <Button title='Ver Perfil' onPress={() => {
                                 this.props.navigation.navigate('User', { user: item })
                             }} />
