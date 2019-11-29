@@ -25,6 +25,7 @@ export default class Main extends Component{
 
         if(prevState.users != users){
             AsyncStorage.setItem('users', JSON.stringify(users))
+            //console.log('mudei')
         }
     }
 
@@ -57,7 +58,7 @@ export default class Main extends Component{
     handleDelete = user =>{
         const { users } = this.state;
         users.splice(users.indexOf(user),1) //retira o user do array
-        this.setState({ users: users })
+        this.setState({ users })
         this.componentDidUpdate('', users) //n sei se é o correto a se fazer, porém deu certo hahaha, aqui tá atualizando o storage pra refletir as exclusões quando o app for aberto novamente
         //console.log(users)
     }
